@@ -1,0 +1,752 @@
+---
+title: |
+  Herding Behavior in cryptocurrency markets \
+  UAB - Department of Applied Economics \
+  Applied Lunch Seminar
+author: |
+  Obryan Poyser \
+  2018/12/04 (updated: `r Sys.Date()`)
+output:
+  xaringan::moon_reader:
+      css: ["css/default.css", "css/opoyc-fonts.css", "css/opoyc.css"]
+      lib_dir: libs
+      nature:
+        highlightStyle: github
+        highlightLines: true
+        countIncrementalSlides: false
+        slideNumberFormat:  |
+            <div class="progress-bar-container">
+              <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+              </div>
+            </div>`
+        ratio: "4:3"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# Outline:
+
+.midle[
+Motivation
+
+Objective
+
+Background
+
+Literature review
+
+Data & Methodology
+
+Model
+
+Empirical results
+
+Conclusion
+]
+
+
+---
+class: inverse, center, middle
+
+# Motivation
+
+---
+class: left, middle
+
+## Previous chapter:
+
+Title: [Exploring the dynamics of Bitcoin Price: A Structural Time Series Approach](https://link.springer.com/article/10.1007/s40822-018-0108-2)
+
+.pull-left[
+Findings:
++ Financial variables had little prediction power to explain BTC dynamics
+    + Probably not a hedge or safe haven asset
++ Google search index data found significant relevance to predict prices
++ None of the internal factors have a relevant impact on the price
++ Bitcoin represents an amalgam of attributes which it make it difficult to discern
++ BTC **lacks of intrinsic value** and displays high volatility.
+]
+
+.pull-right[
+Lines of future work
+- **Is Bitcoin a currency or an asset?**
+- **Are we facing a bubble?**  
+]
+
+---
+class: inverse, center, middle
+
+# Objectives
+
+---
+# Objectives, contribution and limitations
+
+## Objectives
+
++ Characterize cryptocurrencies from the behavioral economics/finance perspective  
++ Describe the particularities of speculative bubbles in crypto-markets
++ Empirical testing for herding behavior for the main cryptocurrencies
+
+--
+
+## Contribution
+- Literature relating behavioral economics/finance and cryptocurrencies is barely existent yet  
+- There are no herding behavior works on this topic (!!!)
+
+--
+
+## Limitations
+- Cryptocurrency' nature is complex
+- Demands an eclectic approach
+
+---
+class: middle, inverse, center
+# Background
+
+---
+## Bitcoin, Altcoins and the distributed ledger Blockchain
+
+- **What is Bitcoin?**: _"...it can be defined as a protocol, platform, currency or payment method"_ (Athey et al. 2016)
+
+- **What is Blockchain?**: It is a distributed, descentralized, peer-to-peer network that serves as a platform to make and record transactions.
+
+- **What is an Altcoin?**: Stands for "alternative coin", refers to other digital currencies different from Bitcoin
+
+By the end of April 2018 there were **1584** different cryptocurrencies
+
+---
+
+## Searching for the parallelism: Financial markets
+
+- Traditional framework on financial economics<sup>1</sup>
+- Markets are assumed to be *efficient*
+- According to Fama (1965) an "efficient" market is defined:
+    - Large numbers of rational, profit-maximizers, actively competing individuals  
+    - Current information is almost freely available to all participants  
+    - Actual prices reflect the effects of information based on salient announcements  
+    - The actual price is a good estimate of its intrinsic value<sup>2</sup> have been removed from the price" (Flood & Garber, 1994)
+
+.footnote[
+[1] Contemporaneous modern finance theory is based on the contribution of Eugene Fama, Stephen Ross, Robert Merton, Myron Scholes, William Sharpe, among others.
+
+[2] Fundamental or intrinsic value is the true value of a company or an stock based business profitability measured for instance by the expected returns.
+]
+
+---
+## The rise of behavioral finance
+
+**Controversy:**
+
+- By the late 1980s, there was a growing sense that some basic facts about financial markets were hard to reconcile with the traditional finance framework
+- Shiller (1981) demostrasted that fluctuations in stock market prices are unlikely a result of rational forecast of firms' future cash flows 
+- The existence of several speculative bubbles episodes spurred the research on behavioral finance  
+    - Dot-com  
+    - Black Monday
+
+--
+
+- Behavioral finance' models based on a few simple assumptions about individual psychology can explain a wide range of empirical facts, and can make concrete, testable predictions, some of which have already been confirmed in the data.
+
+--
+
+- An important finding of recent years is that many of the patterns we observe in the stock market are also present in other asset classes.
+    - Real state  
+    - Long term bonds
+
+--
+
+.center[**Maybe cryptocurrencies?**]
+
+
+---
+
+## Cryptocurrencies
+
+.pull-left[
++ **Currency-money**:
+    - Medium of exchange $\checkmark$  
+    - Unit of account $\checkmark$  
+    - Store of value $\times$
+]
+
+.pull-right[
+- **Asset**
+
+```{r, fig.cap="Components of a typical asset vs cryptocurrencies", echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/diag1.png")
+```
+]
+
+--
+
+- Alan Greenspan asserted that **human behavior is the main factor that drives financial markets**, and even though the correction is customary, there is a **constant evolution that makes behavioral issues pervasively** which could **yield into violent and unexpected results**.
+
+"...how do we know when **irrational exuberance** has unduly escalated asset values..." (Greenspan, 1996)
+
+---
+
+## Behavioral finance
+
+- **Irrational exuberance and animal spirits**
+--
+
+- *Irrational exuberance is the psychological basis of a speculative bubble* (Shiller, 2015)
+--
+
+- **What is a speculative bubble?**
+  - "speculation...is the second component of an asset: it is what is left after market fundamentals  
+  - _"...are persistent, systematic and increasing deviations of actual prices from their fundamental values" (Santoni, 1987).  
+  - "...a situation in which news of price increases spurs **investor enthusiasm**, which spreads by **psychological contagion** from person to person, and, in the process, **amplifies stories** that might **justify the price increase** and brings in a **larger and larger class of investors**, who, **despite doubts about the real value** of the investment, are drawn to it partly through **envy of others’ successes** and partly through a **gambler’s excitement**". (Shiller, 2015)
+--
+
+- **Problem?**
+    - By definition, bubbles can only be identified with complete certainty **ex-post**. (Jones, B., 2014)
+    - Crashes are not a certain outcome of a bubble (Sornette, 2003)
+
+---
+
+## Behavioral finance: The cryptocurrency case
+
+- Is a combination of two things people know the least: information technology and finance (not mine)
+--
+
+- "... the best example right now of irrational exuberance is Bitcoin" (Shiller, 2017)
+--
+
+- Can behavioral finance elucidate on the cryptocurrency puzzle?
+--
+
+- The fact Efficient Market Hypothesis failed to explain anomalies in classic finance economics theory yield a framework focused on individuals' biases  
+    - In [Poyser (2018)](https://link.springer.com/article/10.1007/s40822-018-0108-2) interest from the public had the highest prediction power  
+    - Crypto-investors' psychology involved seem to play an essential role
+---
+
+## Behavioral finance: The cryptocurrency case
+
+**Can we test for the existence of bubbles in cryptocurrencies?**
+
+Most of test are designed to identify abnormal deviations from fundamentals
+
+**Problem:**
+
++ *Fundamental valuation is arguably valid in cryptocurrencies*
+
+**Alternative:**
+
++ Start by characterizing commonalities with evidence on investor's biases present in financial-like settings
++ Step back and try to find evidence of fragility in crypto-markets by testing herding
+
+---
+
+## Behavioral finance: The cryptocurrency case
+
+Three essential factors that deserve special consideration
+
+1. Optimism and overconfidence
+1. Excess of information
+1. Herding behavior
+
+---
+class: center, middle, inverse
+# Literature
+
+---
+
+## Optimism and overconfidence <sup>1</sup>
+
++ People in financial markets exhibit exacerbated trust on their own ability, knowledge, and skills
++ Self-reliance on personal judgments entails
+    -miscalibration  
+    -over-precision  
+    -optimism  
+    -and overreaction to random events
+--
+
+- Examples:
+    - 90% of Swedish car drivers considered themselves better than the median driver (Svenson, 1981).
+    - People fail to assign probabilities and calibrate unexpected events. When asked for 1% and 99% tails for inflation and exchange rates, the results found a 20% rate of "surprise" instead of the 2% expected from the beginnning (Alpert & Raiffa, 1982)
+    - Men are more prone to overtrading than women, and exhibit lower returns as a result of overconfidence (Barber and Odean, 2013)
+
+.footnote[
+[1] See Barber and Odean 2013; Kahneman and Riepe, 1998; Barberis and Thaler, 2002; Alpert and Raiffa, 1982]
+---
+
+## Optimism and overconfidence
+
++ Crypto-investors can easily be overconfidence of their capacity to invest in a market characterized by increasing trend and high returns
+--
+
++ Random events in one cryptocurrencies are interpreted and extrapolated to other altcoins (this might be the reason several cryptocurrencies are correlated)
+
+--
+
+    
+.center[
+```{r, fig.cap="Interpretation to random events", echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/bull.PNG")
+```
+]
+
+---
+
+## Information, interest and social wisdom
+
+> “A wealth of information creates a poverty of attention” (H. Simon)
+
+.center[
+```{r, fig.cap="Bitcoin price vs Google Search Index for \"Bitcoin\" interest", echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/hits_btc_price.png")
+```
+]
+
+---
+
+## Information, interest and social wisdom
+
+**Characteristics:**
+
+- In the information era, there is an **overload of data** that demands the creation of mechanisms to discern **which information is relevant** and which is not.
+--
+
+- Humans have **limited computation capabilities** hence, the formation of “rules of thumb” usually takes place instead of coherent reasoning according to what each state demands
+--
+
+- Delayed reaction to salient information, Overstated attention to stale information (Barber & Odean, 2013)
+--
+
+- Cryptocurrencies' information is based on fairly diversified sources
+    - White papers
+    - News, project websites, blogs and social media.
+    - Presumed cryptocurrency’s experts declare higher prices predictions (anchoring prospects)
+- Reddit: Online forums
+    - Largest community in Internet, with more than 600.000 subscribers
+    - Advice to buy and sell
+    - Investment in new altercoins
+    - Price pattern recognition
+---
+
+## Information and social wisdom
+
+- News media have incentives to broadcast hypes with the purpose of capturing reader’s attention towards different issues, being crypto-markets one of many of them.
+--
+
+- Specialized websites offer "social investing", that is, a system that automatically copy trades done by _experienced, professional and successful_ investors.
+    - Paying a "success fee" as a reward
+    - It disregars private information
+    - Following others’ actions is precisely a clear contradiction to what EMH states about random irrational investors’ decisions.
+
+.center[
+```{r, echo=F}
+knitr::include_graphics("img/all_ct.png")
+```
+]
+
+
+
+---
+
+## Information and social wisdom: Hypothesis
+
+**Hypothesis?**
+
+- An active agent in crypto marketplace may face:
+    - Uncertainty and inability to assess probabilities of events  
+    - Decide accurately  
+    - Assert the degree of quality of announcements
+--
+- **Is it possible to catch up with 1.5K+ cryptocurrencies and ~40 new ones per month?**
+    - In my opinion: **hardly**. Especially in the task of distinguish between fake and true potential projects like an Initial Coin Offering (ICO)
+--
+- Once people receive information, they have to discern if it is accurate or not, **but prices often react faster**, then, it is strategically rational (and probably irrational) to **follow not what others do**, rather to **follow price movements**
+
+---
+class: center, middle, inverse
+
+**"The less information you have, the stronger is your incentive to follow the consensus." (Graham, 1999)**
+
+
+---
+
+## Herding
+
+**Characteristics:**
+
++ Social judgment is intrinsic to cryptocurrency market since the valuation of any currency is contingent to the extension of the group that founds it valuable.
++ Shapiro & Varian (1999, 2004) stated that **old economy** differentiates from the **new economy** in the **substitution of economies of scale by economics of networks**
++ It is profitable to achieve the interest of a critical mass of users/investors that yield a higher market capitalization.
+
+---
+
+## Herding
+
+.pull-left[
+“…so that each competitor has to pick, **not those faces which he himself finds prettiest, but those which she thinks likeliest to catch the fancy of the other competitors**, all of whom are looking at the problem from the same point of view. **It is not a case of choosing those which, to the best of one's judgment, are really the prettiest, nor even those which average opinion genuinely thinks the prettiest**. We have reached the **third degree** where **we devote our intelligence to anticipating what average opinion expects the average opinion to be**. And there are some, **I believe, who practice the fourth, fifth and higher degrees.**” (Keynes, 1936)
+]
+
+.pull-right[
+.center[
+```{r, echo=FALSE}
+knitr::include_graphics("img/beauty_contest.png")
+```
+]
+]
+
+---
+
+## Herding
+
+**What is herding?**
+
++ Process that stems when someone **choose to ignore her private information and instead jump to the bandwagon by mimicking the actions of individuals who acted previously**<sup>1</sup>
+    + Herding vs positive feedback vs informational cascades
+    + If it is sequential: Informational cascades
+    + Herding or behavioral convergence entails the existence of a coordination mechanism (Devenow and Welch, 1996).
++ **Prices movements as coordination mechanism**
+
+.footnote[
+[1] Banerjee, 1992; Bikhchandani; Kumar & Goyal, 2015; Hirshleifer and Welch, 1992; Graham, 1999
+]
+
+---
+
+## Herding
+
+Relevant literature:
+
++ De Long et al. (1990)  **noise trader**<sup>1</sup> represents the irrational alter ego of the sophisticated investors, an investor which **misperceive expected returns** and **generate beliefs and heuristics to buy and sell following a simple feedback rule**
++ Typical transmission mechanisms are expressed as word-of-mouth communication, news and social media exposition, in-place observation, or second degree manifestations **such as market prices**<sup>2</sup>
+
+.footnote[
+[1] Opposite of Information (Black, 1986)
+
+[2] There are several works on investor trading, managerial investment, financing choices, analyst following and forecasts, market prices, market regulation, bank runs, bubbles, and welfare (see Hirshleifer and Hong Teoh, 2003; Brunnermeier and Oehmke, 2013,  Grossman and Stiglitz; 1976)
+]
+
+---
+
+## Herding
+
+Relevant literature:
+
++ Banerjee (1992) found that decision rules chosen by optimizing individuals will be characterized by herd behavior
++ Scharfstein and Stein (1990) stated that in individual investment environments, **managers usually disregard private information by adopting a follow-the-crowd strategy**
++ **Limits of attention** increase the probability of herding due to the difficulty to accurately process information (Hirshleifer and Hong Teoh, 2003).
++ Welch (2000) found that **analysts herd in their stock recommendations**, exposing **significant positive correlation between adjacent analysts**
++ Bikhchandani, Hirshleifer and Welch (1992) proved that herding (informational cascades) could **explain conformity, fads, fashions, booms and crashes**.
+
+
+---
+## Herding
+
+**What is the relationship between herding and speculative bubbles?**
+
++ Sheds light on the fragility of the system in face of extreme price movements
++ Herding solely could not explain the presence of speculative bubbles, but it provides information about **crypto-market conformity dynamics** that entails **fragility** and **bubble susceptible**
+    - **Can herding be measured through prices?**
+    - Herding empirical tests are by construction imperfect but some approximation can be done
+
+---
+class: inverse, middle, center
+# Data & methodology
+---
+
+## Data
+
++ Last cut showed that there were 1557 different cryptocurrencies available in the market
++ This study dampens the sample to the first 100 leading ones which in aggregated terms account for nearly 96% of total cryptocurrency’s (CC) market capitalization.
++ Data was scraped from [www.coinmarketcap.com]("www.coinmarketcap.com") website
++ Range of date varies between cryptocurrencies From 2013-04-01 to 2018-04-15
++ No distinction over categories
+
+$$
+\begin{align}
+R_{c,t}=\frac{CP_{t}-CP_{t-1}}{CP_{t-1}}
+\end{align}
+$$
+
+&nbsp;
+
+$R_{c,t}$: Market returns for the cryptocurrency $c$  
+$CP_t$: Closing prices for time $t$
+
+---
+
+## Methodology: Cross Sectional Standard Deviation of Returns  
+
++ To date few methods have been developed to test for empirical herding under prices settings
++ Crypto-market investors' decision are almost impossible to be measure directly, hence this study will follow prices as coordination mechanism.
++ Christie and Huang (1995) methodology:
+   
+$$
+\begin{align}
+CSSD_t=\sqrt{\frac{\sum_{c=1}^{n}(R_{c,t}-\bar{R}_{m,t})^2}{N-1}}
+\end{align}
+$$
+
+&nbsp;
+
+$CSSD_t$: Cross Sectional Standard Deviation of Returns for time $t$  
+$\bar{R}_{m,t}$: Cross Sectional Average Return for market $m$ across time $t$
+
+---
+
+## Methodology: Cross Sectional Standard Deviation of Returns  
+
+Empirical test based on squared dispersion:
+
+$$
+CSSD_t=\alpha+\beta^LD_t^L+\beta^UD_t^U+\varepsilon_t
+$$
+
+&nbsp;
+with:
+
+$D_t^L=1$: if market return on day $t$ lies in the extreme **lower** $\theta_l$ tail of the distribution, or zero, otherwise  
+$D_t^U=1$: if market return on day $t$ lies in the extreme **upper** $\theta_u$ tail of the distribution, or zero, otherwise  
+
+$\beta^L$ captures herding when extreme low returns occur  
+$\beta^U$ captures herding when extreme high returns occur  
+$\theta_d$: could be $1\%$ or $5\%$ for $l$ and $u$
+
+Limitations:
+
++ Too sensitive to outliers
++ $\theta$ limits are in large part subjective
+
+---
+
+## Herding behavior
+
+Chang, Cheng and Khorana (2000) proposed a modification of Christie and Huang (1995) original idea by taking absolute returns deviation instead of square deviations to calculate market dispersion.
+
++ From Capital Asset Pricing Market (CAPM) the model CCK proved returns dispersion is an increasing and **linear** function of market returns.
+--
+
++ Basic idea: **if market participants tend to follow the consensus and ignore their own priors during periods of large price movements, then the linear and increasing relation between dispersion and market return will no longer hold**
+--
+
++ The relation can become non-linearly increasing (adverse herding) or even decreasing (herding)
+
+$$
+\begin{align}
+CSAD_t=\frac{1}{N} \left | R_{c,t}-\bar{R}_{m,t} \right |
+\end{align}
+$$
+
+
+
++ $CSAD_t$: Cross Sectional Absolute Deviations of Returns for time $t$  
++ $\bar{R}_{m,t}$: Cross Sectional **Median** Return for crypto-market portfolio $m$ across time $t$
+
+---
+class: center, middle
+
+```{r, fig.cap="CSAD returns", echo=F, out.width="50%"}
+knitr::include_graphics("img/csad_returns.jpg")
+```
+
+
+---
+class: inverse, center, middle
+
+# Model
+
+
+---
+
+## Herding behavior
+
+Empirical test based on absolute dispersion:
+
+$$
+\begin{align}
+CSAD_t=\gamma_0+\gamma_1\left|R_{m,t}\right|+\gamma_2 R_{m,t}^2+\gamma_{2+k}CSAD_{t-k}+\varepsilon_t
+\end{align}
+$$
+
+&nbsp;
+
+with:  
+$\varepsilon_t \sim N(0,\sigma^2)$  
+
++ $\gamma_1$ captures the linear relationship between dispersion and market returns  
++ $\gamma_2$ captures herding with $\gamma_2<0$ and adverse herding for $\gamma_2>0$  
++ $k$: AR(k) to dismiss lagged effects
+
++ The baseline in this model will be a rational model of asset returns, that is, a scenario in which crypto-investors do not follow the consensus.
+
+---
+
+## Herding behavior under asymmetric market states
+
+
+Empirical test based on absolute dispersion:
+
+.centered[
+$$
+\begin{split}
+CSAD_t=\gamma_0+\gamma_1 D\times \left|R_{m,t}\right|+\gamma_2 (1-D)\times \left|R_{m,t}\right|+ \\
+D\times\gamma_3 R_{m,t}^2+\gamma_4 (1-D)\times R_{m,t}^2+\gamma_{4+k}CSAD_{t-k}+\varepsilon_t
+\end{split}
+$$
+
+with:  
+$\varepsilon_t \sim N(0,\sigma^2)$  
+
++ $D=1$: if $R_{m,t}<0$  
++ $D=0$: if $R_{m,t}>=0$  
++ $k$: AR(k) to dismiss lagged effects  
+]
+
+---
+
+## Markov Regime-Switching model for herding behavior
+
+
+A two state MC can be described as:
+
+$$
+P=
+\begin{bmatrix}
+P_{1,1} & P_{1,2} & \cdots  & P_{1,j} \\
+P_{2,1} & P_{2,2} & \cdots & P_{2,j}  \\
+\vdots  & \vdots & \ddots &  \vdots \\
+P_{i,1} & P_{i,2} & \cdots & P_{i,j}  
+\end{bmatrix}
+$$
+
+Particularly:
+
+$P(S_t=j|S_{t-1}=i, S_{t-2}=b, ..., \Omega_{t-l})=P(S_t=j|S_{t-1}=i)=P_{ij}$
+
+where:
+$p_{ij}$ transition probability of being at $j$ will only depend on previous state $i$  
+$S_t$ is not observed, but it can be inferred from observed data.  
+$\Omega$ represent all the parameters necessary to describe the Data Generating Process (DGP)
+
+---
+
+## Markov Regime-Switching model for herding behavior
+
+**Advantages**
+
++ MS captures shifts in behavior which are not observable for instance the appeareance of interventions or forcing variables.  
++ High frequency data exhibits structural changes in their behavior associated with observed and unobserved events.
+--
+
++ States follow a Markov Chain
++ It is expected that herding display dynamics that are regime dependent
+  - Adverse herding vs herding  
+  - Intensity of herding  
++ Herding behavior states are (likely):
+  - Unobserved  
+  - Probabilistic
+
+
+---
+
+## Markov Regime-Switching model for herding behavior
+
+**Herding behavior under assymetric states**
+
+$$
+\begin{matrix}
+CSAD_{t,1}=\gamma_{0,1}+\gamma_{1,1} D\times \left|R_{m,t}\right|+\gamma_{2,1} (1-D)\times \left|R_{m,t}\right|+ \\
+\qquad \qquad D\times\gamma_{3,1} R_{m,t}^2+\gamma_{4,1} (1-D)\times R_{m,t}^2+\gamma_{4+k,1}CSAD_{t-k,1}+\varepsilon_{t,1} & S_t=1\\
+CSAD_{t,2}=\gamma_{0,1}+\gamma_{1,2} D\times \left|R_{m,t}\right|+\gamma_{2,2} (1-D)\times \left|R_{m,t}\right|+ \\
+\qquad \qquad D\times\gamma_{3,2} R_{m,t}^2+\gamma_{4,2} (1-D)\times R_{m,t}^2+\gamma_{4+k,2}CSAD_{t-k,2}+\varepsilon_{t,2} & S_t=1\\
+ \vdots & \vdots \\
+CSAD_{t,i}=\gamma_{0,i}+\gamma_{1,i} D\times \left|R_{m,t}\right|+\gamma_{2,i} (1-D)\times \left|R_{m,t}\right|+ \\
+\qquad \qquad D\times\gamma_{3,i} R_{m,t}^2+\gamma_{4,i} (1-D)\times R_{m,t}^2+\gamma_{4+k,i}CSAD_{t-k,i}+\varepsilon_{t,i} & S_t=i\\
+\end{matrix}
+$$
+
+with:
+$\varepsilon_{t,i} \sim N(0,\sigma_{i}^2) \  for \ i=1,...,n$
+
++ Parameters $\gamma_r \  \ for\ \ r=1,...,4+k$ and $\sigma^2_s$ will be allowed to change
++ The model employed Newey and West (1987) variance estimator to produce consistent standard errors in the presence of autocorrelation and heteroscedasticity.
++ The number of "regimes" is chosen given Akaike Information Criteria (AIC)
++ Subjectivity exist into presenting an equilibrium between descriptive power and interpretability
+
+
+---
+class: center, middle, inverse
+
+# Results
+
+
+---
+class: middle
+
+.center[
+```{r, fig.cap="Regression estimates of herding behavior", echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/reg1.png")
+```
+]
+
+---
+class: middle
+.center[
+```{r, fig.cap="Regression estimates of herding behavior", echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/reg11.png")
+```
+]
+
+---
+class: middle, center
+
+```{r, fig.cap="Regime switching smoothed probabilities under symmetric herding behavior for the full sample", echo=FALSE, out.width="50%"}
+knitr::include_graphics("img/sp_reg1.png")
+```
+
+---
+class: middle, center
+
+```{r, fig.cap="Regression estimates of herding behavior on the full sample under asymmetric states", echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/reg2_v2.png")
+```
+
+---
+class: middle, center
+
+```{r, fig.cap="Regression estimates of herding behavior on the full sample under asymmetric states", echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/reg21.png")
+```
+
+---
+class: middle, center
+
+```{r, fig.cap="Regression estimates of herding behavior on the full sample under asymmetric states", echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/reg22.png")
+```
+
+---
+class: middle, center
+
+```{r, fig.cap="Regression estimates of herding behavior on the full sample under asymmetric states", echo=FALSE, out.width="60%"}
+knitr::include_graphics("img/g_reg2_2.png")
+```
+
+---
+class: inverse, center, middle
+
+# Conclusion
+
+
+---
+
+## Conclusion
+
++ Behavioral finance provides insights to the crypto-currency puzzle by considering investors' psychology
++ Crypto-investors frequently follow the consensus under market stress situations
++ Herding has been evidenced in increasing returns scenarios, while in decreasing states the evidence was not overwhelming.
++ Herding has been intensifying since 2016 and it got stronger during the last months of 2017
+
+---
+class: center, middle
+
+# Thanks!
+
